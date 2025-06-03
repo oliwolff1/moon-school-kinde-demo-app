@@ -32,7 +32,7 @@ export default function HomeHeader({ currentPage = "landing" }: HomeHeaderProps)
         <LoginLink className="text-white hover:text-orange-300 transition-colors duration-300">
           Sign in
         </LoginLink>
-        <RegisterLink className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300">
+        <RegisterLink className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300" authUrlParams={{is_create_org:'true'}}>
           Register
         </RegisterLink>
       </nav>

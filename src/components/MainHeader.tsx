@@ -66,7 +66,7 @@ export default async function Header({ showNav = true }: HeaderProps) {
                   <LoginLink className="button button-uncontained">Sign in</LoginLink>
                 </li>
                 <li>
-                  <RegisterLink className="button">Register</RegisterLink>
+                  <RegisterLink className="button" authUrlParams={{is_create_org:'true'}}>Register</RegisterLink>
                 </li>
               </>
             )}

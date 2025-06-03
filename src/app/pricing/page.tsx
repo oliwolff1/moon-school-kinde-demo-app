@@ -16,8 +16,8 @@ interface Plan {
 const plans: Plan[] = [
   {
     name: "Lunar Learner",
-    price: "$0",
-    description: "Moon School Courses, Monthly Newsletter, 3 Rocket Simulations/month",
+    price: "Free",
+    description: "Launch your journey into space training",
     features: [
       "Moon School Courses",
       "Monthly Newsletter",
@@ -30,12 +30,10 @@ const plans: Plan[] = [
     name: "Martian Explorer",
     price: "$49",
     period: "/mo",
-    description: "Everything in Lunar Learner, Mars Mission Briefings, Spaceport Lounge Access, 10 Teleportation Credits, 100kg Cargo Allowance",
+    description: "For crews ready to explore new frontiers",
     features: [
       "Everything in Lunar Learner",
-      "Mars Mission Briefings",
-      "Spaceport Lounge Access",
-      "10 Teleportation Credits",
+      "Unlimited Rocket Simulations",
       "100kg Cargo Allowance",
     ],
     highlighted: true,
@@ -47,13 +45,11 @@ const plans: Plan[] = [
     name: "Venus Vanguard",
     price: "$149",
     period: "/mo",
-    description: "Everything in Martian Explorer, Live Venus Colony Feed, AI Mission Assistant, 50 Satellite Uplink Minutes, 5 Priority Docking Requests",
+    description: "Lead missions beyond the stars",
     features: [
       "Everything in Martian Explorer",
-      "Live Venus Colony Feed",
       "AI Mission Assistant",
-      "50 Satellite Uplink Minutes",
-      "5 Priority Docking Requests",
+      "5,000kg Cargo Allowance",
     ],
     buttonVariant: "outline",
     buttonText: "Choose Plan",
@@ -93,9 +89,11 @@ export default function PricingPage() {
             <div
               key={plan.name}
               className={`relative rounded-xl border p-8 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 flex flex-col backdrop-blur-sm
-                ${plan.highlighted 
-                  ? 'border-orange-500 bg-gradient-to-br from-orange-900/30 to-orange-800/20 shadow-orange-500/20' 
-                  : 'border-gray-600 bg-gradient-to-br from-gray-800/50 to-gray-900/30'}`}
+                ${
+                  plan.highlighted
+                    ? "border-orange-500 bg-gradient-to-br from-orange-900/30 to-orange-800/20 shadow-orange-500/20"
+                    : "border-gray-600 bg-gradient-to-br from-gray-800/50 to-gray-900/30"
+                }`}
             >
               {/* Badge */}
               {plan.badge && (
@@ -104,9 +102,7 @@ export default function PricingPage() {
                 </span>
               )}
 
-              <h2 className="text-2xl font-semibold text-white">
-                {plan.name}
-              </h2>
+              <h2 className="text-2xl font-semibold text-white">{plan.name}</h2>
 
               <p className="mt-4 flex items-baseline">
                 <span className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300">
