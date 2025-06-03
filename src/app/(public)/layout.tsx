@@ -15,24 +15,20 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Kinde Next.js Starter",
+  title: "Moon School | Cosmic Education",
   description:
-    "A Next.js authentication starter template using Kinde, TypeScript and tailwindcss. Deploy to Vercel now in one click.",
+    "Enlighten your team with cosmic education. Interactive space courses for your company's next giant leap.",
 };
 
-export default function RootLayout({
+export default function PublicLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-t from-slate-100 to-white flex flex-col min-h-screen  dark:to-slate-950 dark:from-black`}
-      >
-        <HomeHeader />
-        {children}
-      </body>
-    </html>
+    <div className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white`}>
+      <HomeHeader currentPage="landing" />
+      {children}
+    </div>
   );
 }
