@@ -14,8 +14,6 @@ import {
   Target,
   Shield,
   Gauge,
-  Satellite,
-  Globe,
   Activity,
 } from "lucide-react";
 

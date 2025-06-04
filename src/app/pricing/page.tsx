@@ -12,7 +12,7 @@ interface Plan {
   buttonText: string;
   highlighted?: boolean;
   badge?: string;
-  planId?: string;
+  planId: string;
 }
 
 const plans: Plan[] = [
