@@ -43,7 +43,7 @@ const plans: Plan[] = [
     badge: "Most Popular",
     buttonVariant: "solid",
     buttonText: "Choose Plan",
-    planId: "martian-explorer",
+    planId: "martin-explorer",
   },
   {
     name: "Venus Vanguard",
@@ -140,7 +140,7 @@ export default function PricingPage() {
               <RegisterLink
                 authUrlParams={{
                   is_create_org: "true",
-                  plan: plan.planId,
+                  plan_interest: plan.planId,
                 }}
                 className={`mt-8 w-full px-4 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-center inline-block
                   ${
