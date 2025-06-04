@@ -27,7 +27,7 @@ const plans: Plan[] = [
     ],
     buttonVariant: "outline",
     buttonText: "Choose Plan",
-    planId: "free",
+    planId: "lunar-learner",
   },
   {
     name: "Martian Explorer",
@@ -43,7 +43,7 @@ const plans: Plan[] = [
     badge: "Most Popular",
     buttonVariant: "solid",
     buttonText: "Choose Plan",
-    planId: "martian_explorer",
+    planId: "martian-explorer",
   },
   {
     name: "Venus Vanguard",
@@ -57,7 +57,7 @@ const plans: Plan[] = [
     ],
     buttonVariant: "outline",
     buttonText: "Choose Plan",
-    planId: "venus_vanguard",
+    planId: "venus-vanguard",
   },
 ];
 
