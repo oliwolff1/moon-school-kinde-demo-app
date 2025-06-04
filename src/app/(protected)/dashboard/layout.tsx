@@ -1,38 +1,16 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import Header from "@/components/MainHeader";
 import "../../globals.css";
 
-const geistSans = localFont({
-  src: "../../fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "../../fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
 export const metadata: Metadata = {
-  title: "Kinde Next.js Starter | Dashboard",
+  title: "Moon School | Mission Control Dashboard",
   description:
-    "A Next.js authentication starter template using Kinde, TypeScript and tailwindcss. Deploy to Vercel now in one click.",
+    "Command your space training missions from the ultimate cosmic dashboard.",
 };
 
-export default function RootLayout({
+export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-t from-slate-100 to-white flex flex-col min-h-screen dark:to-slate-950 dark:from-black`}
-      >
-        <Header />
-        {children}
-      </body>
-    </html>
-  );
+  return children;
 }

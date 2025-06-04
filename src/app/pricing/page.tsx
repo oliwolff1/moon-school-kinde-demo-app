@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import HomeHeader from "@/components/HomeHeader";
 
 interface Plan {
@@ -11,6 +12,7 @@ interface Plan {
   buttonText: string;
   highlighted?: boolean;
   badge?: string;
+  planId: string;
 }
 
 const plans: Plan[] = [
@@ -25,6 +27,7 @@ const plans: Plan[] = [
     ],
     buttonVariant: "outline",
     buttonText: "Choose Plan",
+    planId: "free",
   },
   {
     name: "Martian Explorer",
@@ -40,6 +43,7 @@ const plans: Plan[] = [
     badge: "Most Popular",
     buttonVariant: "solid",
     buttonText: "Choose Plan",
+    planId: "martian_explorer",
   },
   {
     name: "Venus Vanguard",
@@ -53,6 +57,7 @@ const plans: Plan[] = [
     ],
     buttonVariant: "outline",
     buttonText: "Choose Plan",
+    planId: "venus_vanguard",
   },
 ];
 
@@ -132,8 +137,12 @@ export default function PricingPage() {
                 ))}
               </ul>
 
-              <button
-                className={`mt-8 w-full px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105
+              <RegisterLink
+                authUrlParams={{
+                  is_create_org: "true",
+                  plan: plan.planId,
+                }}
+                className={`mt-8 w-full px-4 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-center inline-block
                   ${
                     plan.buttonVariant === "solid"
                       ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700 shadow-lg shadow-orange-500/30"
@@ -141,7 +150,7 @@ export default function PricingPage() {
                   }`}
               >
                 {plan.buttonText}
-              </button>
+              </RegisterLink>
             </div>
           ))}
         </div>
