@@ -1,7 +1,23 @@
 "use client";
 
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { Rocket, Star, Zap, CreditCard, ArrowUp, CheckCircle, Target, Shield, Gauge, Satellite, Globe, Activity } from "lucide-react";
+import {
+  LogoutLink,
+  PortalLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
+import {
+  Rocket,
+  Star,
+  Zap,
+  CreditCard,
+  ArrowUp,
+  CheckCircle,
+  Target,
+  Shield,
+  Gauge,
+  Satellite,
+  Globe,
+  Activity,
+} from "lucide-react";
 
 interface User {
   id?: string;
@@ -20,7 +36,7 @@ export default function DashboardContent({ user }: DashboardContentProps) {
     name: "Martian Explorer",
     price: "$49/mo",
     color: "from-orange-500 to-orange-600",
-    badge: "Active"
+    badge: "Active",
   };
 
   const missionStats = {
@@ -31,20 +47,41 @@ export default function DashboardContent({ user }: DashboardContentProps) {
     coursesCompleted: 8,
     totalCourses: 12,
     xpEarned: 2450,
-    missionRank: "Commander"
+    missionRank: "Commander",
   };
 
   const recentMissions = [
-    { id: 1, name: "Mars Landing Protocol", status: "completed", date: "2024-01-15", xp: 150, difficulty: "Advanced" },
-    { id: 2, name: "Orbital Mechanics", status: "in-progress", date: "2024-01-18", xp: 0, difficulty: "Intermediate" },
-    { id: 3, name: "Deep Space Navigation", status: "pending", date: "2024-01-20", xp: 0, difficulty: "Expert" }
+    {
+      id: 1,
+      name: "Mars Landing Protocol",
+      status: "completed",
+      date: "2024-01-15",
+      xp: 150,
+      difficulty: "Advanced",
+    },
+    {
+      id: 2,
+      name: "Orbital Mechanics",
+      status: "in-progress",
+      date: "2024-01-18",
+      xp: 0,
+      difficulty: "Intermediate",
+    },
+    {
+      id: 3,
+      name: "Deep Space Navigation",
+      status: "pending",
+      date: "2024-01-20",
+      xp: 0,
+      difficulty: "Expert",
+    },
   ];
 
   const systemStatus = [
     { name: "Life Support", status: "optimal", value: 98 },
     { name: "Navigation", status: "optimal", value: 100 },
     { name: "Communications", status: "warning", value: 85 },
-    { name: "Propulsion", status: "optimal", value: 94 }
+    { name: "Propulsion", status: "optimal", value: 94 },
   ];
 
   return (
@@ -60,7 +97,7 @@ export default function DashboardContent({ user }: DashboardContentProps) {
         <div className="absolute bottom-60 right-10 w-1 h-1 bg-white rounded-full star-6"></div>
         <div className="absolute top-1/3 left-10 w-0.5 h-0.5 bg-white rounded-full star-7"></div>
         <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-white rounded-full star-8"></div>
-        
+
         {/* Additional smaller stars */}
         <div className="absolute top-32 left-1/3 w-0.5 h-0.5 bg-blue-300 rounded-full star-9"></div>
         <div className="absolute top-80 right-1/4 w-0.5 h-0.5 bg-orange-300 rounded-full star-10"></div>
@@ -78,7 +115,9 @@ export default function DashboardContent({ user }: DashboardContentProps) {
           <div className="flex-1">
             <div className="flex items-center gap-4 mb-2">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
-              <span className="text-green-400 text-sm font-semibold tracking-wider">SYSTEM ONLINE</span>
+              <span className="text-green-400 text-sm font-semibold tracking-wider">
+                SYSTEM ONLINE
+              </span>
               <div className="hidden lg:flex items-center gap-2 ml-auto">
                 <div className="text-gray-400 text-sm">Total XP:</div>
                 <div className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
@@ -94,7 +133,7 @@ export default function DashboardContent({ user }: DashboardContentProps) {
               Mission Control Dashboard • Rank: {missionStats.missionRank}
             </p>
           </div>
-          
+
           {/* Mobile XP and Logout */}
           <div className="flex items-center justify-between w-full lg:w-auto gap-4">
             <div className="lg:hidden">
@@ -105,10 +144,36 @@ export default function DashboardContent({ user }: DashboardContentProps) {
             </div>
             <LogoutLink className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-500/30 flex items-center gap-2">
               <span>End Mission</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
               </svg>
             </LogoutLink>
+            <PortalLink className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-500/30 flex items-center gap-2">
+              <span>Portal</span>
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+            </PortalLink>
           </div>
         </div>
 
@@ -120,8 +185,12 @@ export default function DashboardContent({ user }: DashboardContentProps) {
               <div className="absolute inset-0 w-8 h-8 bg-orange-400 rounded opacity-20 blur animate-pulse"></div>
             </div>
             <div className="flex-1">
-              <div className="text-white font-bold text-xl">{userPlan.name}</div>
-              <div className="text-orange-300 text-sm font-medium">{userPlan.price} • Premium Access</div>
+              <div className="text-white font-bold text-xl">
+                {userPlan.name}
+              </div>
+              <div className="text-orange-300 text-sm font-medium">
+                {userPlan.price} • Premium Access
+              </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="bg-green-500 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg shadow-green-500/30">
@@ -140,20 +209,35 @@ export default function DashboardContent({ user }: DashboardContentProps) {
           </h2>
           <div className="grid gap-3 md:grid-cols-4">
             {systemStatus.map((system) => (
-              <div key={system.name} className="bg-gradient-to-br from-gray-800/60 to-gray-900/40 border border-gray-600 rounded-lg p-4 backdrop-blur-sm">
+              <div
+                key={system.name}
+                className="bg-gradient-to-br from-gray-800/60 to-gray-900/40 border border-gray-600 rounded-lg p-4 backdrop-blur-sm"
+              >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-gray-300 text-sm font-medium">{system.name}</span>
-                  <div className={`w-2 h-2 rounded-full ${
-                    system.status === 'optimal' ? 'bg-green-400 shadow-lg shadow-green-400/50' :
-                    system.status === 'warning' ? 'bg-yellow-400 shadow-lg shadow-yellow-400/50' : 'bg-red-400 shadow-lg shadow-red-400/50'
-                  } animate-pulse`}></div>
+                  <span className="text-gray-300 text-sm font-medium">
+                    {system.name}
+                  </span>
+                  <div
+                    className={`w-2 h-2 rounded-full ${
+                      system.status === "optimal"
+                        ? "bg-green-400 shadow-lg shadow-green-400/50"
+                        : system.status === "warning"
+                          ? "bg-yellow-400 shadow-lg shadow-yellow-400/50"
+                          : "bg-red-400 shadow-lg shadow-red-400/50"
+                    } animate-pulse`}
+                  ></div>
                 </div>
-                <div className="text-lg font-bold text-white">{system.value}%</div>
+                <div className="text-lg font-bold text-white">
+                  {system.value}%
+                </div>
                 <div className="mt-2 bg-gray-700 rounded-full h-1.5">
-                  <div 
+                  <div
                     className={`h-1.5 rounded-full transition-all duration-500 ${
-                      system.status === 'optimal' ? 'bg-gradient-to-r from-green-500 to-green-400' :
-                      system.status === 'warning' ? 'bg-gradient-to-r from-yellow-500 to-yellow-400' : 'bg-gradient-to-r from-red-500 to-red-400'
+                      system.status === "optimal"
+                        ? "bg-gradient-to-r from-green-500 to-green-400"
+                        : system.status === "warning"
+                          ? "bg-gradient-to-r from-yellow-500 to-yellow-400"
+                          : "bg-gradient-to-r from-red-500 to-red-400"
                     }`}
                     style={{ width: `${system.value}%` }}
                   ></div>
@@ -177,15 +261,22 @@ export default function DashboardContent({ user }: DashboardContentProps) {
                   <Rocket className="w-7 h-7 text-orange-400 drop-shadow-lg group-hover:scale-110 transition-transform duration-300" />
                   <div className="absolute inset-0 w-7 h-7 bg-orange-400 rounded opacity-20 blur animate-pulse"></div>
                 </div>
-                <h3 className="text-white font-bold text-lg">Rocket Simulations</h3>
+                <h3 className="text-white font-bold text-lg">
+                  Rocket Simulations
+                </h3>
               </div>
               <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 mb-3 drop-shadow-lg">
                 {missionStats.simulationsUsed}
               </div>
               <div className="text-gray-300 font-medium">
-                {missionStats.simulationsLimit === 999 ? "∞ Unlimited" : `of ${missionStats.simulationsLimit}`} this month
+                {missionStats.simulationsLimit === 999
+                  ? "∞ Unlimited"
+                  : `of ${missionStats.simulationsLimit}`}{" "}
+                this month
               </div>
-              <div className="mt-3 text-xs text-orange-300 font-semibold">PREMIUM ACCESS</div>
+              <div className="mt-3 text-xs text-orange-300 font-semibold">
+                PREMIUM ACCESS
+              </div>
             </div>
 
             {/* Cargo Allowance */}
@@ -200,11 +291,15 @@ export default function DashboardContent({ user }: DashboardContentProps) {
               <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 mb-3 drop-shadow-lg">
                 {missionStats.cargoUsed}kg
               </div>
-              <div className="text-gray-300 font-medium mb-3">of {missionStats.cargoLimit}kg allowance</div>
+              <div className="text-gray-300 font-medium mb-3">
+                of {missionStats.cargoLimit}kg allowance
+              </div>
               <div className="bg-gray-700 rounded-full h-3 shadow-inner">
-                <div 
+                <div
                   className="bg-gradient-to-r from-blue-500 to-cyan-400 h-3 rounded-full transition-all duration-500 shadow-lg shadow-blue-500/30"
-                  style={{ width: `${(missionStats.cargoUsed / missionStats.cargoLimit) * 100}%` }}
+                  style={{
+                    width: `${(missionStats.cargoUsed / missionStats.cargoLimit) * 100}%`,
+                  }}
                 ></div>
               </div>
             </div>
@@ -216,16 +311,22 @@ export default function DashboardContent({ user }: DashboardContentProps) {
                   <Zap className="w-7 h-7 text-green-400 drop-shadow-lg group-hover:scale-110 transition-transform duration-300" />
                   <div className="absolute inset-0 w-7 h-7 bg-green-400 rounded opacity-20 blur animate-pulse"></div>
                 </div>
-                <h3 className="text-white font-bold text-lg">Training Progress</h3>
+                <h3 className="text-white font-bold text-lg">
+                  Training Progress
+                </h3>
               </div>
               <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300 mb-3 drop-shadow-lg">
                 {missionStats.coursesCompleted}/{missionStats.totalCourses}
               </div>
-              <div className="text-gray-300 font-medium mb-3">courses completed</div>
+              <div className="text-gray-300 font-medium mb-3">
+                courses completed
+              </div>
               <div className="bg-gray-700 rounded-full h-3 shadow-inner">
-                <div 
+                <div
                   className="bg-gradient-to-r from-green-500 to-emerald-400 h-3 rounded-full transition-all duration-500 shadow-lg shadow-green-500/30"
-                  style={{ width: `${(missionStats.coursesCompleted / missionStats.totalCourses) * 100}%` }}
+                  style={{
+                    width: `${(missionStats.coursesCompleted / missionStats.totalCourses) * 100}%`,
+                  }}
                 ></div>
               </div>
             </div>
@@ -244,41 +345,65 @@ export default function DashboardContent({ user }: DashboardContentProps) {
                   <div className="absolute inset-0 w-7 h-7 bg-orange-400 rounded opacity-20 blur animate-pulse"></div>
                 </div>
                 My Missions
-                <div className="ml-auto text-sm text-gray-400 font-normal">{recentMissions.length} Active</div>
+                <div className="ml-auto text-sm text-gray-400 font-normal">
+                  {recentMissions.length} Active
+                </div>
               </h2>
               <div className="space-y-4">
                 {recentMissions.map((mission) => (
-                  <div key={mission.id} className="group p-5 bg-gradient-to-r from-gray-800/40 to-gray-900/30 rounded-xl border border-gray-700 hover:border-gray-600 hover:shadow-lg transition-all duration-300">
+                  <div
+                    key={mission.id}
+                    className="group p-5 bg-gradient-to-r from-gray-800/40 to-gray-900/30 rounded-xl border border-gray-700 hover:border-gray-600 hover:shadow-lg transition-all duration-300"
+                  >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <div className={`w-4 h-4 rounded-full shadow-lg ${
-                          mission.status === 'completed' ? 'bg-green-400 shadow-green-400/50' :
-                          mission.status === 'in-progress' ? 'bg-orange-400 shadow-orange-400/50 animate-pulse' : 'bg-gray-500 shadow-gray-500/50'
-                        }`}></div>
+                        <div
+                          className={`w-4 h-4 rounded-full shadow-lg ${
+                            mission.status === "completed"
+                              ? "bg-green-400 shadow-green-400/50"
+                              : mission.status === "in-progress"
+                                ? "bg-orange-400 shadow-orange-400/50 animate-pulse"
+                                : "bg-gray-500 shadow-gray-500/50"
+                          }`}
+                        ></div>
                         <div>
-                          <h3 className="text-white font-semibold text-lg group-hover:text-orange-300 transition-colors duration-300">{mission.name}</h3>
+                          <h3 className="text-white font-semibold text-lg group-hover:text-orange-300 transition-colors duration-300">
+                            {mission.name}
+                          </h3>
                           <div className="flex items-center gap-3 mt-1">
-                            <p className="text-gray-400 text-sm">{mission.date}</p>
-                            <span className={`text-xs px-2 py-1 rounded-full font-semibold ${
-                              mission.difficulty === 'Expert' ? 'bg-red-500/20 text-red-300' :
-                              mission.difficulty === 'Advanced' ? 'bg-orange-500/20 text-orange-300' : 'bg-blue-500/20 text-blue-300'
-                            }`}>
+                            <p className="text-gray-400 text-sm">
+                              {mission.date}
+                            </p>
+                            <span
+                              className={`text-xs px-2 py-1 rounded-full font-semibold ${
+                                mission.difficulty === "Expert"
+                                  ? "bg-red-500/20 text-red-300"
+                                  : mission.difficulty === "Advanced"
+                                    ? "bg-orange-500/20 text-orange-300"
+                                    : "bg-blue-500/20 text-blue-300"
+                              }`}
+                            >
                               {mission.difficulty}
                             </span>
                           </div>
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
-                        {mission.status === 'completed' && (
+                        {mission.status === "completed" && (
                           <div className="text-green-400 font-bold text-sm bg-green-500/10 px-3 py-1 rounded-full">
                             +{mission.xp} XP
                           </div>
                         )}
-                        <div className={`px-4 py-2 rounded-full text-sm font-bold shadow-lg ${
-                          mission.status === 'completed' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
-                          mission.status === 'in-progress' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
-                        }`}>
-                          {mission.status.replace('-', ' ').toUpperCase()}
+                        <div
+                          className={`px-4 py-2 rounded-full text-sm font-bold shadow-lg ${
+                            mission.status === "completed"
+                              ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                              : mission.status === "in-progress"
+                                ? "bg-orange-500/20 text-orange-400 border border-orange-500/30"
+                                : "bg-gray-500/20 text-gray-400 border border-gray-500/30"
+                          }`}
+                        >
+                          {mission.status.replace("-", " ").toUpperCase()}
                         </div>
                       </div>
                     </div>
@@ -303,28 +428,38 @@ export default function DashboardContent({ user }: DashboardContentProps) {
                 <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
                   <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
                   <div>
-                    <div className="text-white font-semibold">Moon School Courses</div>
+                    <div className="text-white font-semibold">
+                      Moon School Courses
+                    </div>
                     <div className="text-green-300 text-sm">Full Access</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
                   <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
                   <div>
-                    <div className="text-white font-semibold">Unlimited Simulations</div>
-                    <div className="text-green-300 text-sm">Premium Feature</div>
+                    <div className="text-white font-semibold">
+                      Unlimited Simulations
+                    </div>
+                    <div className="text-green-300 text-sm">
+                      Premium Feature
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
                   <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
                   <div>
-                    <div className="text-white font-semibold">100kg Cargo Allowance</div>
+                    <div className="text-white font-semibold">
+                      100kg Cargo Allowance
+                    </div>
                     <div className="text-green-300 text-sm">45kg Used</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
                   <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
                   <div>
-                    <div className="text-white font-semibold">Priority Support</div>
+                    <div className="text-white font-semibold">
+                      Priority Support
+                    </div>
                     <div className="text-green-300 text-sm">24/7 Available</div>
                   </div>
                 </div>
@@ -345,15 +480,21 @@ export default function DashboardContent({ user }: DashboardContentProps) {
               </h2>
               <div className="space-y-4">
                 <div className="flex justify-between items-center p-3 bg-gray-800/40 rounded-lg">
-                  <span className="text-gray-300 font-medium">Current Plan</span>
+                  <span className="text-gray-300 font-medium">
+                    Current Plan
+                  </span>
                   <span className="text-white font-bold">{userPlan.name}</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-gray-800/40 rounded-lg">
-                  <span className="text-gray-300 font-medium">Monthly Cost</span>
+                  <span className="text-gray-300 font-medium">
+                    Monthly Cost
+                  </span>
                   <span className="text-white font-bold">{userPlan.price}</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-gray-800/40 rounded-lg">
-                  <span className="text-gray-300 font-medium">Next Billing</span>
+                  <span className="text-gray-300 font-medium">
+                    Next Billing
+                  </span>
                   <span className="text-white font-bold">Feb 15, 2024</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
@@ -381,7 +522,11 @@ export default function DashboardContent({ user }: DashboardContentProps) {
                 Upgrade Mission
               </h2>
               <p className="text-gray-300 mb-4 leading-relaxed">
-                Ready for deeper space exploration? Upgrade to <span className="text-purple-300 font-semibold">Venus Vanguard</span> for advanced mission capabilities.
+                Ready for deeper space exploration? Upgrade to{" "}
+                <span className="text-purple-300 font-semibold">
+                  Venus Vanguard
+                </span>{" "}
+                for advanced mission capabilities.
               </p>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3 text-sm text-gray-300">
@@ -405,7 +550,9 @@ export default function DashboardContent({ user }: DashboardContentProps) {
                 🚀 Upgrade to Venus Vanguard
               </button>
               <div className="mt-3 text-center">
-                <span className="text-purple-300 text-sm font-semibold">$149/mo • Advanced Explorer Package</span>
+                <span className="text-purple-300 text-sm font-semibold">
+                  $149/mo • Advanced Explorer Package
+                </span>
               </div>
             </div>
           </div>
