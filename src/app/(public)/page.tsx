@@ -50,8 +50,8 @@ export default function Home() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 items-center">
-          <RegisterLink className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl" authUrlParams={{is_create_org:'true'}}>
-            Get Started
+          <RegisterLink className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl" >
+            Get Started 
           </RegisterLink>
           <Link 
             href="/pricing"

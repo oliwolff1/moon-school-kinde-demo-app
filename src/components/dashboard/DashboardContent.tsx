@@ -1,9 +1,11 @@
 "use client";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 import {
   LogoutLink,
   PortalLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
+import { MemoryStorage, PortalPage, StorageKeys, getEntitlements, setActiveStorage } from "@kinde/js-utils";
 import {
   Rocket,
   Star,
@@ -16,19 +18,68 @@ import {
   Gauge,
   Activity,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface User {
   id?: string;
   email?: string | null;
   given_name?: string | null;
-  family_name?: string | null;
 }
 
 interface DashboardContentProps {
   user: User | null;
 }
 
+interface Entitlement {
+  id: string;
+  name: string;
+  description?: string;
+  status: "active" | "inactive";
+}
+
 export default function DashboardContent({ user }: DashboardContentProps) {
+  const [entitlements, setEntitlements] = useState<Entitlement[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const {getAccessTokenRaw} = useKindeBrowserClient()
+
+  useEffect(() => {
+    const initializeEntitlements = async () => {
+      const storage = new MemoryStorage();
+      // console.log(await auth.getAccessToken());
+      console.log(await getAccessTokenRaw());
+      await storage.setSessionItem(StorageKeys.accessToken, await getAccessTokenRaw());
+      setActiveStorage(storage);
+      
+      const fetchEntitlements = async () => {
+        try {
+          setLoading(true);
+          const userEntitlements = await getEntitlements();
+          
+          // Handle the response properly - it might be an array or have a different structure
+          if (Array.isArray(userEntitlements)) {
+            setEntitlements(userEntitlements);
+          } else if (userEntitlements && typeof userEntitlements === 'object') {
+            // If it's an object with entitlements property
+            const entitlementsArray = (userEntitlements as any).entitlements || userEntitlements;
+            setEntitlements(Array.isArray(entitlementsArray) ? entitlementsArray : []);
+          } else {
+            setEntitlements([]);
+          }
+        } catch (err) {
+          console.error("Error fetching entitlements:", err);
+          setError("Failed to load entitlements");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      await fetchEntitlements();
+    };
+
+    initializeEntitlements();
+  }, []);
+
   // Mock data - in a real app, this would come from your database
   const userPlan = {
     name: "Martian Explorer",
@@ -156,7 +207,7 @@ export default function DashboardContent({ user }: DashboardContentProps) {
                 />
               </svg>
             </LogoutLink>
-            <PortalLink className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-500/30 flex items-center gap-2">
+            <PortalLink subNav={PortalPage.planDetails} className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-500/30 flex items-center gap-2">
               <span>Portal</span>
               <svg
                 className="w-4 h-4"
@@ -421,47 +472,104 @@ export default function DashboardContent({ user }: DashboardContentProps) {
                   <div className="absolute inset-0 w-7 h-7 bg-green-400 rounded opacity-20 blur animate-pulse"></div>
                 </div>
                 Mission Entitlements
+                {loading && (
+                  <div className="ml-auto">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-400"></div>
+                  </div>
+                )}
               </h2>
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
-                  <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div>
-                    <div className="text-white font-semibold">
-                      Moon School Courses
+              
+              {error && (
+                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-4">
+                  <p className="text-red-400 text-sm">{error}</p>
+                </div>
+              )}
+
+              {!loading && !error && (
+                <div className="grid gap-4 md:grid-cols-2">
+                  {entitlements.length > 0 ? (
+                    entitlements.map((entitlement) => (
+                      <div
+                        key={entitlement.id}
+                        className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 group ${
+                          entitlement.status === "active"
+                            ? "bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 hover:border-green-500/60"
+                            : "bg-gradient-to-r from-gray-500/15 to-gray-500/5 border border-gray-500/40 hover:border-gray-500/60"
+                        }`}
+                      >
+                        <CheckCircle 
+                          className={`w-6 h-6 transition-transform duration-300 group-hover:scale-110 ${
+                            entitlement.status === "active" 
+                              ? "text-green-400" 
+                              : "text-gray-400"
+                          }`} 
+                        />
+                        <div>
+                          <div className="text-white font-semibold">
+                            {entitlement.name}
+                          </div>
+                          <div className={`text-sm ${
+                            entitlement.status === "active" 
+                              ? "text-green-300" 
+                              : "text-gray-400"
+                          }`}>
+                            {entitlement.description || entitlement.status === "active" ? "Active" : "Inactive"}
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-2 text-center py-8">
+                      <div className="text-gray-400 text-lg mb-2">No entitlements found</div>
+                      <div className="text-gray-500 text-sm">Contact mission control for access permissions</div>
                     </div>
-                    <div className="text-green-300 text-sm">Full Access</div>
+                  )}
+                </div>
+              )}
+
+              {/* Fallback mock entitlements if no real entitlements are loaded */}
+              {!loading && !error && entitlements.length === 0 && (
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
+                    <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
+                    <div>
+                      <div className="text-white font-semibold">
+                        Moon School Courses
+                      </div>
+                      <div className="text-green-300 text-sm">Full Access</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
+                    <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
+                    <div>
+                      <div className="text-white font-semibold">
+                        Unlimited Simulations
+                      </div>
+                      <div className="text-green-300 text-sm">
+                        Premium Feature
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
+                    <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
+                    <div>
+                      <div className="text-white font-semibold">
+                        100kg Cargo Allowance
+                      </div>
+                      <div className="text-green-300 text-sm">45kg Used</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
+                    <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
+                    <div>
+                      <div className="text-white font-semibold">
+                        Priority Support
+                      </div>
+                      <div className="text-green-300 text-sm">24/7 Available</div>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
-                  <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div>
-                    <div className="text-white font-semibold">
-                      Unlimited Simulations
-                    </div>
-                    <div className="text-green-300 text-sm">
-                      Premium Feature
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
-                  <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div>
-                    <div className="text-white font-semibold">
-                      100kg Cargo Allowance
-                    </div>
-                    <div className="text-green-300 text-sm">45kg Used</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/15 to-green-500/5 border border-green-500/40 rounded-xl hover:border-green-500/60 transition-all duration-300 group">
-                  <CheckCircle className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div>
-                    <div className="text-white font-semibold">
-                      Priority Support
-                    </div>
-                    <div className="text-green-300 text-sm">24/7 Available</div>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
 

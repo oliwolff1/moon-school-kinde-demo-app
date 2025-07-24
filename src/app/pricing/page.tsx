@@ -31,7 +31,7 @@ const plans: Plan[] = [
   },
   {
     name: "Martian Explorer",
-    price: "$49",
+    price: "$1",
     period: "/mo",
     description: "For crews ready to explore new frontiers",
     features: [
@@ -43,11 +43,11 @@ const plans: Plan[] = [
     badge: "Most Popular",
     buttonVariant: "solid",
     buttonText: "Choose Plan",
-    planId: "martin-explorer",
+    planId: "martian-explorer",
   },
   {
     name: "Venus Vanguard",
-    price: "$149",
+    price: "$2",
     period: "/mo",
     description: "Lead missions beyond the stars",
     features: [
@@ -139,8 +139,7 @@ export default function PricingPage() {
 
               <RegisterLink
                 authUrlParams={{
-                  is_create_org: "true",
-                  plan_interest: plan.planId,
+                  plan_interest: plan.planId
                 }}
                 className={`mt-8 w-full px-4 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-center inline-block
                   ${
